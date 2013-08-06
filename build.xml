@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="run">
+	<property file="res/build.properties"/>
+	<property name="build.number" value="${build.major.number}.${build.minor.number}.${build.revision.number}"/>
+	<path id="external.classpath">
+        <fileset dir="./lib/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+   	<path id="project.class.path">
+		<pathelement path="src/" />
+		  <fileset dir="./lib/">
+            <include name="**/*.jar" />
+        </fileset>
+	</path>
+	
+	<target name="current-number">
+	 	<echo>Current build number:${build.number}</echo>
+	</target>
+	
+	<target name="compile">
+	   	<antcall target="revision"></antcall>
+	   	<javac srcdir="src/" classpathref="external.classpath"/>
+	</target>
+	
+	<target name="dist">
+	  <antcall target="minor"></antcall>
+	</target>
+	
+	<target name="revision">
+	    <propertyfile  file="res/build.properties">
+	            <entry key="build.revision.number" type="int" operation="+" value="1" pattern="0"/>
+	    </propertyfile>
+	</target>
+	
+	<target name="minor">
+	    <propertyfile  file="res/build.properties">
+	            <entry key="build.minor.number" type="int" operation="+" value="1" pattern="0"/>
+	            <entry key="build.revision.number" type="int" value="0" pattern="0"/>
+	    </propertyfile>
+	</target>
+	
+	<target name="major">
+	    <propertyfile  file="res/build.properties">
+	            <entry key="build.major.number" type="int" operation="+" value="1" pattern="0"/>
+	            <entry key="build.minor.number" type="int" value="0" pattern="0"/>
+	            <entry key="build.revision.number" type="int" value="0" pattern="0"/>
+	    </propertyfile>
+	</target>
+	
+	<target name="all">
+	    <propertyfile  file="res/build.properties">
+	            <entry key="build.major.number" type="int" operation="+" value="1" pattern="00"/>
+	            <entry key="build.minor.number" type="int" operation="+" value="1" pattern="00"/>
+	            <entry key="build.revision.number" type="int" operation="+" value="1" pattern="00"/>
+	    </propertyfile>
+	</target>
+	
+	<target name="run">
+	    <echo>Compiling Sources</echo>
+	    <antcall target="compile"></antcall>
+	    <antcall target="current-number"></antcall>
+   	 	<echo>Running Program...</echo>
+	 	<java fork="yes" classname="view.FtpBrowse">
+	       		<classpath refid="project.class.path" />
+	       		<arg value="${build.number}"/>
+	 	</java>
+	</target>
+</project>
