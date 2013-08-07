@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -30,11 +31,18 @@ public class FtpBrowse {
 		ftpClient.connect(Constants.HOSTNAME);
 		ftpClient.login(Constants.USERNAME, Constants.PASSWORD);
 		FTPFile[] files = ftpClient.listFiles(Constants.BASE);
-		for(FTPFile f : files) System.out.println(f.getName());
 		view.remote_tableModel.setData(files);
+		String home = System.getProperty("user.home");
+		File homeDir = new File(home);
+		File[] localFiles = homeDir.listFiles();
+		view.local_tableModel.setData(localFiles);
+		view.setDirectoryName(view.left_panel, homeDir.getAbsolutePath());
+		view.setDirectoryName(view.right_panel,Constants.BASE);
 	}
 		
 	public void show(){
 		view.frame.setVisible(true);
 	}
+	
+	
 }
