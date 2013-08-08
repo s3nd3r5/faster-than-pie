@@ -15,7 +15,15 @@ public class FTPTableModel extends AbstractTableModel {
 	}
 	
 	public void setData(FTPFile[] data){
-		this.data = data;
+		FTPFile back = new FTPFile();
+		back.setType(1);
+		back.setName("..");
+		back.setSize(-1);
+		this.data = new FTPFile[data.length+1];
+		this.data[0] = back;
+		for(int i = 0; i < data.length; i++){
+			this.data[i+1] = data[i];
+		}
 		fireTableDataChanged();
 	}
 	
@@ -57,7 +65,10 @@ public class FTPTableModel extends AbstractTableModel {
     
     private String analyizeSize(long size,int type,int num){
     	String formatted = "";
-    	if(type == 1){ return "Folder"; }
+    	if(type == 1){ 
+    		if(size == -1) return "Previous Directory";
+    		return "Folder"; 
+		}
     	if(size > 1024){
     		return analyizeSize(size /= 1024,type,num+1);
     	}

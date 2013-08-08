@@ -15,7 +15,9 @@ public class LocalTableModel extends AbstractTableModel {
 	}
 	
 	public void setData(File[] data){
-		this.data = data;
+		this.data = new File[data.length+1];
+		this.data[0] = null;
+		for(int i = 0; i < data.length; i++) this.data[i+1] = data[i];
 		fireTableDataChanged();
 	}
 	
@@ -39,8 +41,17 @@ public class LocalTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String value = "";
 		switch(columnIndex){
-			case 0: value = data[rowIndex].getName(); break;
-			case 1: value = analyizeSize(data[rowIndex].length(),data[rowIndex].isDirectory(),0) + ""; break;
+			case 0:{
+
+				if(data[rowIndex] == null) return "..";
+				value = data[rowIndex].getName(); 
+				break;
+			}
+			case 1:{
+
+				if(data[rowIndex] == null) return "Previous Directory";
+				value = analyizeSize(data[rowIndex].length(),data[rowIndex].isDirectory(),0) + ""; break;
+			}
 		}
 		return value;
 	}

@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,8 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableColumnModel;
 
 import components.FTPTableModel;
+import components.IconTextCellRenderer;
 import components.LocalTableModel;
 
 
@@ -61,7 +64,10 @@ public class View {
 		//Table
 		local_table.setModel(local_tableModel);
 		remote_table.setModel(remote_tableModel);
-		
+		TableColumnModel tcm = local_table.getColumnModel();
+		tcm.getColumn(0).setCellRenderer(new IconTextCellRenderer());
+		tcm = remote_table.getColumnModel();
+		tcm.getColumn(0).setCellRenderer(new IconTextCellRenderer());
 		
 		//Panels
 		left_panel.add(local_scrollPane,BorderLayout.CENTER);
@@ -92,6 +98,8 @@ public class View {
 		menu_bar.add(menu);
 		
 		//Frame
+		ImageIcon image = new ImageIcon("./picon-large.png");
+		frame.setIconImage(image.getImage());
 		frame.setJMenuBar(menu_bar);
 		frame.setContentPane(panel);
 		
