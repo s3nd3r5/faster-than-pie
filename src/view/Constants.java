@@ -15,9 +15,9 @@ public class Constants {
 		public static final String 
 				TITLE = "FtpBrowse"
 				,VERSION_APPEND = " -v: "
-				,HOSTNAME = "hades.feralhosting.com"
-				,USERNAME = "grognatz"
-				,PASSWORD = "1freKdEcnOgVz0IN"
+				,HOSTNAME = "server.hostname.net"
+				,USERNAME = "!!!username!!!"
+				,PASSWORD = "**********"
 				,BASE = "~/Downloads/"
 				;
 		
