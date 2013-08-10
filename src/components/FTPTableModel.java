@@ -15,14 +15,23 @@ public class FTPTableModel extends AbstractTableModel {
 	}
 	
 	public void setData(FTPFile[] data){
-		FTPFile back = new FTPFile();
-		back.setType(1);
-		back.setName("..");
-		back.setSize(-1);
-		this.data = new FTPFile[data.length+1];
-		this.data[0] = back;
-		for(int i = 0; i < data.length; i++){
-			this.data[i+1] = data[i];
+		if(data != null){
+			FTPFile back = new FTPFile();
+			back.setType(1);
+			back.setName("..");
+			back.setSize(-1);
+			this.data = new FTPFile[data.length+1];
+			this.data[0] = back;
+			for(int i = 0; i < data.length; i++){
+				this.data[i+1] = data[i];
+			}
+		}else{
+			FTPFile back = new FTPFile();
+			back.setType(1);
+			back.setName("..");
+			back.setSize(-1);
+			this.data = new FTPFile[1];
+			this.data[0] = back;
 		}
 		fireTableDataChanged();
 	}

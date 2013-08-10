@@ -24,23 +24,27 @@ import components.LocalTableModel;
 
 public class View {
 	protected JFrame frame;
-	protected JPanel panel,center_panel,left_panel,right_panel;
+	protected JPanel panel,center_panel;
+	private JPanel left_panel;
+	private JPanel right_panel;
 	protected FTPTableModel remote_tableModel;
 	protected LocalTableModel local_tableModel;
 	protected JScrollPane local_scrollPane, remote_scrollPane;
-	protected JTable local_table, remote_table,center_table;
+	public JTable local_table, remote_table,center_table;
 	protected JMenuBar menu_bar;
 	protected JMenu menu;
 	protected JMenuItem fileMenuItem;
 	protected Image icon;
+	public String current_remote_path = Constants.BASE;
+	public String current_local_path = Constants.LOCAL_BASE;
 	public void initialize(String build_number){
 		
 	//Initialize Swing Classes
 		frame = new JFrame();
 		panel = new JPanel();
 		center_panel = new JPanel(new GridLayout(1,2));
-		left_panel = new JPanel(new BorderLayout());
-		right_panel = new JPanel(new BorderLayout());
+		setLeft_panel(new JPanel(new BorderLayout()));
+		setRight_panel(new JPanel(new BorderLayout()));
 		
 		local_tableModel = new LocalTableModel();
 		remote_tableModel = new FTPTableModel();
@@ -70,23 +74,23 @@ public class View {
 		tcm.getColumn(0).setCellRenderer(new IconTextCellRenderer());
 		
 		//Panels
-		left_panel.add(local_scrollPane,BorderLayout.CENTER);
-		right_panel.add(remote_scrollPane,BorderLayout.CENTER);
+		getLeft_panel().add(local_scrollPane,BorderLayout.CENTER);
+		getRight_panel().add(remote_scrollPane,BorderLayout.CENTER);
 
-		center_panel.add(left_panel);
-		center_panel.add(right_panel);
+		center_panel.add(getLeft_panel());
+		center_panel.add(getRight_panel());
 
 		panel.setLayout(new BorderLayout());
 		panel.add(center_panel,BorderLayout.CENTER);
 		panel.add(new JPanel(),BorderLayout.SOUTH);
 		
-		left_panel.setBorder (BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+		getLeft_panel().setBorder (BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
                  "Local Directory",
                  TitledBorder.CENTER,
                  TitledBorder.TOP));
 		
 		
-		right_panel.setBorder (BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+		getRight_panel().setBorder (BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
                 "Remote Directory",
                 TitledBorder.CENTER,
                 TitledBorder.TOP));
@@ -108,5 +112,25 @@ public class View {
 	public void setDirectoryName(JPanel p, String title){
 		((TitledBorder)p.getBorder()).setTitle(title);
 	}
+	
 	public void setIcon(String path) { icon = Toolkit.getDefaultToolkit().createImage(path); }
+	public JPanel getRight_panel() {
+		return right_panel;
+	}
+	public void setRight_panel(JPanel right_panel) {
+		this.right_panel = right_panel;
+	}
+	public JPanel getLeft_panel() {
+		return left_panel;
+	}
+	public void setLeft_panel(JPanel left_panel) {
+		this.left_panel = left_panel;
+	}
+	public boolean isWindows() {
+		if(System.getProperty("os.name").toLowerCase().contains("win")){
+			return true;
+		}
+		return false;
+	}
+	
 }

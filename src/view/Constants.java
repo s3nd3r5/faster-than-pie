@@ -15,10 +15,12 @@ public class Constants {
 		public static final String 
 				TITLE = "FtpBrowse"
 				,VERSION_APPEND = " -v: "
-				,HOSTNAME = "server.hostname.net"
-				,USERNAME = "!!!username!!!"
-				,PASSWORD = "**********"
+				,HOSTNAME = "hades.feralhosting.com"
+				,USERNAME = "grognatz"
+				,PASSWORD = "1freKdEcnOgVz0IN"
 				,BASE = "~/Downloads/"
+				,REMOTE_OS = "linux"
+				,LOCAL_BASE = System.getProperty("user.home")
 				;
 		
 		public static final Icon FOLDER = null, FILE = null;

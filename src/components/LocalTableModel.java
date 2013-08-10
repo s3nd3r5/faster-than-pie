@@ -15,9 +15,14 @@ public class LocalTableModel extends AbstractTableModel {
 	}
 	
 	public void setData(File[] data){
-		this.data = new File[data.length+1];
-		this.data[0] = null;
-		for(int i = 0; i < data.length; i++) this.data[i+1] = data[i];
+		if(data != null){
+			this.data = new File[data.length+1];
+			this.data[0] = null;
+			for(int i = 0; i < data.length; i++) this.data[i+1] = data[i];
+		}else{
+			this.data = new File[1];
+			this.data[0] = null;
+		}
 		fireTableDataChanged();
 	}
 	
