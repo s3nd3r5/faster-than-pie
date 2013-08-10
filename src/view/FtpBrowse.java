@@ -7,6 +7,8 @@ import java.net.SocketException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -19,7 +21,8 @@ public class FtpBrowse {
 	View view;
 	FTPClient ftpClient;
 	FTPController controller;
-	public FtpBrowse(String[] args) throws SocketException, IOException {
+	public FtpBrowse(String[] args) throws SocketException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		view = new View();
 		view.initialize(args[0]);		
 		load();
@@ -31,9 +34,10 @@ public class FtpBrowse {
 		FtpBrowse browser;
 		try {
 			browser = new FtpBrowse(args);
+			
 			browser.show();
 			
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 	}

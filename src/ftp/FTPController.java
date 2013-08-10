@@ -23,9 +23,13 @@ public class FTPController {
 	}
 	public void navigateTo(int row, JTable table) throws IOException{
 		int nameColumn = 0;
+		int typeColumn = 1;
 		if(!table.getColumnName(0).equalsIgnoreCase("Name")){
 			nameColumn = 1;
+			typeColumn = 0;
 		}
+		String type = (String)table.getValueAt(row,typeColumn);
+		if(!type.equalsIgnoreCase("folder") && !type.equalsIgnoreCase("previous directory")) return; //TODO HANDLE FILE DOUBLE CLICK
 		String value = (String)table.getValueAt(row, nameColumn);
 		if(table.getModel() instanceof FTPTableModel){
 			String path = makePath_remote(value,view.current_remote_path);
