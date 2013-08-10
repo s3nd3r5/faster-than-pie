@@ -20,3 +20,15 @@ The purpose of this program is to give your box "user" access without configurin
     3. Make Requests
         - A sample Node.js file with instructions on configuration will be supplied allowing for you to have web access
         - You can just FTP the requests to a specific file on your server if you do not wish to have webaccess on your server
+
+##Setting up for YOUR FTP Server
+    1. Create a file called "ftp.properties" in your res/ folder
+    2. Add the properties:      
+            - hostname = server.hostname.org
+            - username = xxCholosniperXx420yoloswag
+            - password = 12345password
+            - os = linux
+                - used when determining / vs \\ so only thing is if windows "win" else "anything without win"
+            - base = /usr/home/xxCholosniperXx420yoloswag/
+                - any valid path is acceptable '~/' '/' '~/folder/subfolder/' 
+    
