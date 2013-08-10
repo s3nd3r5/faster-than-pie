@@ -23,6 +23,7 @@ public class FtpBrowse {
 	FTPController controller;
 	public FtpBrowse(String[] args) throws SocketException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		Constants.initFTPConstants();
 		view = new View();
 		view.initialize(args[0]);		
 		load();
