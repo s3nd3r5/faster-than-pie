@@ -126,7 +126,7 @@ public class View {
 	public void setLeft_panel(JPanel left_panel) {
 		this.left_panel = left_panel;
 	}
-	public boolean isWindows() {
+	public static boolean isWindows() {
 		if(System.getProperty("os.name").toLowerCase().contains("win")){
 			return true;
 		}
