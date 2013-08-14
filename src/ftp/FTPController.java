@@ -50,7 +50,7 @@ public class FTPController {
 		if(currentPath.equalsIgnoreCase(Constants.BASE) && append.equalsIgnoreCase("..")){
 			return currentPath;
 		}
-		if(view.isWindows()) return makePath_Windows(append,currentPath);
+		if(View.isWindows()) return makePath_Windows(append,currentPath);
 		else return makePath_nonWindows(append,currentPath);
 	}
 	public String makePath_remote(String append, String currentPath){
@@ -79,7 +79,7 @@ public class FTPController {
 		return currentPath;
 	}
 	public void updatePath(String path, int left0_right1){
-		if(view.isWindows()){
+		if(View.isWindows()){
 			updatePath_Windows(path,left0_right1);
 		}else{
 			updatePath_nonWindows(path, left0_right1);

@@ -13,6 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumnModel;
@@ -30,6 +31,7 @@ public class View {
 	protected FTPTableModel remote_tableModel;
 	protected LocalTableModel local_tableModel;
 	protected JScrollPane local_scrollPane, remote_scrollPane;
+	protected JSplitPane splitPane;
 	public JTable local_table, remote_table,center_table;
 	protected JMenuBar menu_bar;
 	protected JMenu menu;
@@ -64,6 +66,7 @@ public class View {
 		frame.setSize(Constants.PREFERED_SIZE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
 	//Add Components
 		//Table
 		local_table.setModel(local_tableModel);
@@ -77,8 +80,13 @@ public class View {
 		getLeft_panel().add(local_scrollPane,BorderLayout.CENTER);
 		getRight_panel().add(remote_scrollPane,BorderLayout.CENTER);
 
-		center_panel.add(getLeft_panel());
-		center_panel.add(getRight_panel());
+//		center_panel.add(getLeft_panel());
+//		center_panel.add(getRight_panel());
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				left_panel, right_panel);
+				splitPane.setOneTouchExpandable(true);
+				splitPane.setDividerLocation(frame.getWidth()/2);
+		center_panel.add(splitPane);
 
 		panel.setLayout(new BorderLayout());
 		panel.add(center_panel,BorderLayout.CENTER);
