@@ -25,7 +25,7 @@ public class FtpBrowse {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		Constants.initFTPConstants();
 		view = new View();
-		view.initialize(args[0]);		
+		view.initialize(args.length > 0?args[0]:"TEST");		
 		load();
 		controller = new FTPController(view, ftpClient);
 		view.remote_table.addMouseListener(new TableMouseEventHandler(controller,view.remote_table));
@@ -35,7 +35,6 @@ public class FtpBrowse {
 		FtpBrowse browser;
 		try {
 			browser = new FtpBrowse(args);
-			
 			browser.show();
 			
 		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
@@ -45,6 +44,10 @@ public class FtpBrowse {
 	
 	private void load() throws SocketException, IOException{
 		ftpClient = new FTPClient();
+		ftpClient.enterLocalPassiveMode();
+		ftpClient.setDefaultTimeout(1000000);
+		ftpClient.setDataTimeout(1000000);
+		ftpClient.setConnectTimeout(1000000);
 		ftpClient.connect(Constants.HOSTNAME);
 		ftpClient.login(Constants.USERNAME, Constants.PASSWORD);
 		FTPFile[] files = ftpClient.listFiles(Constants.BASE);

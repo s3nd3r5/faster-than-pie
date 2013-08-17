@@ -4,6 +4,8 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.net.ftp.FTPFile;
 
+import ftp.FTPController;
+
 public class FTPTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -2692170403007650028L;
 	
@@ -57,7 +59,7 @@ public class FTPTableModel extends AbstractTableModel {
 		String value = "";
 		switch(columnIndex){
 			case 0: value = data[rowIndex].getName(); break;
-			case 1: value = analyizeSize(data[rowIndex].getSize(),data[rowIndex].getType(),0) + ""; break;
+			case 1: value = FTPController.analyizeSize(data[rowIndex].getSize(),data[rowIndex].getType(),0) + ""; break;
 		}
 		return value;
 	}
@@ -72,22 +74,5 @@ public class FTPTableModel extends AbstractTableModel {
         return columns[columnIndex].getClass();
     }
     
-    private String analyizeSize(long size,int type,int num){
-    	String formatted = "";
-    	if(type == 1){ 
-    		if(size == -1) return "Previous Directory";
-    		return "Folder"; 
-		}
-    	if(size > 1024){
-    		return analyizeSize(size /= 1024,type,num+1);
-    	}
-    	switch(num){
-    		case 0: formatted = " B"; break;
-    		case 1: formatted = " KB"; break;
-    		case 2: formatted = " MB"; break;
-    		case 3: formatted = " GB"; break;
-    	}
-    	return size + formatted;
-    }
 
 }
