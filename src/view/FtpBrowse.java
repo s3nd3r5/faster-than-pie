@@ -44,12 +44,12 @@ public class FtpBrowse {
 	
 	private void load() throws SocketException, IOException{
 		ftpClient = new FTPClient();
-		ftpClient.enterLocalPassiveMode();
 		ftpClient.setDefaultTimeout(1000000);
 		ftpClient.setDataTimeout(1000000);
 		ftpClient.setConnectTimeout(1000000);
 		ftpClient.connect(Constants.HOSTNAME);
 		ftpClient.login(Constants.USERNAME, Constants.PASSWORD);
+		ftpClient.enterLocalPassiveMode();
 		FTPFile[] files = ftpClient.listFiles(Constants.BASE);
 		
 		

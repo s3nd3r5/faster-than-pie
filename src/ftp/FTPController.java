@@ -63,16 +63,23 @@ public class FTPController {
 			finalClient.setConnectTimeout(1000000);
 			finalClient.connect(Constants.HOSTNAME);
 			finalClient.login(Constants.USERNAME, Constants.PASSWORD);
+			finalClient.enterLocalActiveMode();
+			finalClient.setBufferSize(214748364);
 			final FTPFile to_download = ((FTPTableModel)view.remote_table.getModel()).getData()[row];
 			final long actual_size = to_download.getSize();
 			File f = new File(makePath("",view.current_local_path) + fileName);
 			f.createNewFile();
 			fos = new FileOutputStream(f);
+			final long startTime = System.nanoTime();
 			final CountingOutputStream cos = new CountingOutputStream(fos){
 			    protected void beforeWrite(int n){
 			        super.beforeWrite(n);
 			        Double percent = ((double)getCount()/(double)actual_size) * 100.00;
-			        System.out.println("Downloaded "+ analyizeSize(getCount(),false,0) + "/" + size + "\t" + percent.longValue() + "%");
+			        long time = System.nanoTime();
+			        long delta = (time - startTime)/1000000;
+			        long data = getCount();
+			        long ratio =  data / (delta == 0?1:delta);
+			        	System.out.println("Downloaded "+ analyizeSize(data,false,0) + "/" + size + "\t" + percent.longValue() + "%\tRatio: " + ratio+ "/s");
 			    }
 			};
 			

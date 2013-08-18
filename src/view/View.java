@@ -21,6 +21,7 @@ import javax.swing.table.TableColumnModel;
 import components.FTPTableModel;
 import components.IconTextCellRenderer;
 import components.LocalTableModel;
+import components.QueueTableModel;
 
 
 public class View {
@@ -30,9 +31,10 @@ public class View {
 	private JPanel right_panel;
 	protected FTPTableModel remote_tableModel;
 	protected LocalTableModel local_tableModel;
-	protected JScrollPane local_scrollPane, remote_scrollPane;
+	protected QueueTableModel queue_tableModel;
+	protected JScrollPane local_scrollPane, remote_scrollPane, queue_scrollPane;
 	protected JSplitPane splitPane;
-	public JTable local_table, remote_table,center_table;
+	public JTable local_table, remote_table,queue_table;
 	protected JMenuBar menu_bar;
 	protected JMenu menu;
 	protected JMenuItem fileMenuItem;
