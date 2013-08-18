@@ -1,0 +1,11 @@
+#ignore eclipse specific shit
+bin/
+.settings/
+.project
+.classpath
+#ignore FTP.properties
+res/ftp.properties
+#ignore compiled shit
+*.class
+#ignore what i just said
+#.gitignore #lets pass it back

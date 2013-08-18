@@ -65,6 +65,8 @@ public class FTPController {
 			finalClient.login(Constants.USERNAME, Constants.PASSWORD);
 			finalClient.enterLocalActiveMode();
 			finalClient.setBufferSize(214748364);
+			finalClient.setFileTransferMode(FTPClient.BINARY_FILE_TYPE);
+			finalClient.setFileType(FTPClient.BINARY_FILE_TYPE);
 			final FTPFile to_download = ((FTPTableModel)view.remote_table.getModel()).getData()[row];
 			final long actual_size = to_download.getSize();
 			File f = new File(makePath("",view.current_local_path) + fileName);
@@ -79,7 +81,7 @@ public class FTPController {
 			        long delta = (time - startTime)/1000000;
 			        long data = getCount();
 			        long ratio =  data / (delta == 0?1:delta);
-			        	System.out.println("Downloaded "+ analyizeSize(data,false,0) + "/" + size + "\t" + percent.longValue() + "%\tRatio: " + ratio+ "/s");
+			        	System.out.println("Downloaded "+ analyizeSize(data,false,0) + "/" + size + "\t" + percent.longValue() + "%\tRatio: " + ratio+ "KB/s");
 			    }
 			};
 			
