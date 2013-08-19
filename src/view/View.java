@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -58,7 +59,7 @@ public class View {
 		
 		local_scrollPane = new JScrollPane(local_table);
 		remote_scrollPane = new JScrollPane(remote_table);
-		
+
 		menu_bar = new JMenuBar();
 		menu = new JMenu();
 		fileMenuItem = new JMenuItem();
@@ -77,13 +78,13 @@ public class View {
 		tcm.getColumn(0).setCellRenderer(new IconTextCellRenderer());
 		tcm = remote_table.getColumnModel();
 		tcm.getColumn(0).setCellRenderer(new IconTextCellRenderer());
+		local_table.setShowGrid(false);
+		remote_table.setShowGrid(false);
 		
 		//Panels
 		getLeft_panel().add(local_scrollPane,BorderLayout.CENTER);
 		getRight_panel().add(remote_scrollPane,BorderLayout.CENTER);
 
-//		center_panel.add(getLeft_panel());
-//		center_panel.add(getRight_panel());
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				left_panel, right_panel);
 				splitPane.setOneTouchExpandable(true);
