@@ -1,10 +1,13 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -23,6 +26,8 @@ import components.FTPTableModel;
 import components.IconTextCellRenderer;
 import components.LocalTableModel;
 import components.QueueTableModel;
+import components.TableMouseEventHandler;
+import ftp.FTPController;
 
 
 public class View {
@@ -38,7 +43,7 @@ public class View {
 	public JTable local_table, remote_table,queue_table;
 	protected JMenuBar menu_bar;
 	protected JMenu menu;
-	protected JMenuItem fileMenuItem;
+	protected JMenuItem closeMenuItem;
 	protected Image icon;
 	public String current_remote_path = Constants.BASE;
 	public String current_local_path = Constants.LOCAL_BASE;
@@ -62,7 +67,7 @@ public class View {
 
 		menu_bar = new JMenuBar();
 		menu = new JMenu();
-		fileMenuItem = new JMenuItem();
+		closeMenuItem = new JMenuItem();
 		
 		frame.setTitle(Constants.TITLE + Constants.VERSION_APPEND + build_number);
 		frame.setPreferredSize(Constants.PREFERED_SIZE);
@@ -108,8 +113,8 @@ public class View {
 		
 		//Menu
 		menu.setText("File");
-		fileMenuItem.setText("Close");
-		menu.add(fileMenuItem);
+		closeMenuItem.setText("Close");
+		menu.add(closeMenuItem);
 		menu_bar.add(menu);
 		
 		//Frame
@@ -142,6 +147,19 @@ public class View {
 			return true;
 		}
 		return false;
+	}
+	
+	protected void addActionListeners(FTPController controller){
+
+		remote_table.addMouseListener(new TableMouseEventHandler(controller,remote_table));
+		local_table.addMouseListener(new TableMouseEventHandler(controller,local_table));
+		closeMenuItem.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				
+			}
+		});	
 	}
 	
 }

@@ -1,10 +1,6 @@
 package components;
 
-import java.io.File;
-
 import javax.swing.table.AbstractTableModel;
-
-import ftp.FTPController;
 
 public class QueueTableModel extends AbstractTableModel {
 

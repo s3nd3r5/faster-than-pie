@@ -28,8 +28,7 @@ public class FtpBrowse {
 		view.initialize(args.length > 0?args[0]:"TEST");		
 		load();
 		controller = new FTPController(view, ftpClient);
-		view.remote_table.addMouseListener(new TableMouseEventHandler(controller,view.remote_table));
-		view.local_table.addMouseListener(new TableMouseEventHandler(controller,view.local_table));
+		view.addActionListeners(controller);
 	}
 	public static void main(String[] args){
 		FtpBrowse browser;
