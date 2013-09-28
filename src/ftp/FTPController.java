@@ -3,6 +3,7 @@ package ftp;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
@@ -51,6 +52,20 @@ public class FTPController {
 		table.updateUI();
 		return true;
 	}
+	
+	public boolean navigateTo(String path, JTable table) throws IOException{
+		if(table.getModel() instanceof FTPTableModel){
+			((FTPTableModel)table.getModel()).setData(client.listFiles(path));
+			updatePath_remote(path,1);
+		}else{
+			((LocalTableModel)table.getModel()).setData(new File(path).listFiles());
+			updatePath(path,0);
+		}
+		table.updateUI();
+		
+		return true;
+	}
+	
 	private boolean doDownload(int row, int col, JTable table) {
 		try {
 			final String fileName = (String)table.getValueAt(row, col);
@@ -80,8 +95,15 @@ public class FTPController {
 			        long time = System.nanoTime();
 			        long delta = (time - startTime)/1000000;
 			        long data = getCount();
+			        long eta = actual_size - data;
 			        long ratio =  data / (delta == 0?1:delta);
-			        	System.out.println("Downloaded "+ analyizeSize(data,false,0) + "/" + size + "\t" + percent.longValue() + "%\tRatio: " + ratio+ "KB/s");
+			        eta /= ratio;
+			        String etaa = String.format("%d min %d sec", 
+			        	    TimeUnit.MILLISECONDS.toMinutes(eta),
+			        	    TimeUnit.MILLISECONDS.toSeconds(eta) - 
+			        	    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(eta))
+			        	);
+			        	System.out.println("Downloaded "+ analyizeSize(data,false,0) + "/" + size + "\t" + percent.longValue() + "%\tRatio: " + ratio+ "KB/s\tETA: " + etaa);
 			    }
 			};
 			

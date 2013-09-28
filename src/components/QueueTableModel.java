@@ -1,16 +1,12 @@
 package components;
 
-import java.io.File;
-
 import javax.swing.table.AbstractTableModel;
-
-import ftp.FTPController;
 
 public class QueueTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	Queue<String[]> data;
-	private static final String[] columns = {"Name","Size"};
+	private static final String[] columns = {"Number","Name","Destination","Progress","Ratio"};
 
 	public Queue<String[]> getData(){
 		return data;
@@ -44,19 +40,7 @@ public class QueueTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String value = "";
-//		switch(columnIndex){
-//			case 0:{
-//
-//				if(data[rowIndex] == null) return "..";
-////				value = data[rowIndex].getName(); 
-//				break;
-//			}
-//			case 1:{
-//
-//				if(data[rowIndex] == null) return "Previous Directory";
-////				value = FTPController.analyizeSize(data[rowIndex].length(),data[rowIndex].isDirectory(),0) + ""; break;
-//			}
-//		}
+		
 		return value;
 	}
 	@Override
