@@ -13,8 +13,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import components.TableMouseEventHandler;
-
 import ftp.FTPController;
 
 public class FtpBrowse {

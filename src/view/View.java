@@ -6,8 +6,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -27,6 +25,7 @@ import components.IconTextCellRenderer;
 import components.LocalTableModel;
 import components.QueueTableModel;
 import components.TableMouseEventHandler;
+
 import ftp.FTPController;
 
 
