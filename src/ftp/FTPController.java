@@ -78,7 +78,7 @@ public class FTPController {
 			finalClient.setConnectTimeout(1000000);
 			finalClient.connect(Constants.HOSTNAME);
 			finalClient.login(Constants.USERNAME, Constants.PASSWORD);
-			finalClient.enterLocalActiveMode();
+			finalClient.enterLocalPassiveMode();
 			finalClient.setBufferSize(214748364);
 			finalClient.setFileTransferMode(FTPClient.BINARY_FILE_TYPE);
 			finalClient.setFileType(FTPClient.BINARY_FILE_TYPE);
